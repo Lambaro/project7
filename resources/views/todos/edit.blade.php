@@ -13,5 +13,5 @@
         <input type="submit" value="update" class="p-2 border rounded">
     </form>
 
-    <a href="/todos/" class=" p-2 border m-5 pointer-event bg-white text-black text-decoration-none">Back</a>
+    <a href="{{ route('todo.index') }}" class=" p-2 border m-5 pointer-event bg-white text-black text-decoration-none">Back</a>
 @endsection
