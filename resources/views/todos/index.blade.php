@@ -10,7 +10,8 @@
 
     <ul class="list-group my-4">
         <x-alert/>
-        @foreach($todos as $todo)
+
+        @forelse($todos as $todo)
             <li class="justify-content-between d-inline-flex py-2">
                 @include('todos.completeButton')
 
@@ -19,11 +20,11 @@
                         <del>{{ $todo->title }}</del>
                     </p>
                 @else
-                    <p>{{ $todo->title }}</p>
+                    <a class="text-decoration-none text-dark" href="{{route('todo.show', $todo->id)}}">{{ $todo->title }}</a>
                 @endif
                 <div>
                     <a href="{{ route('todo.edit', $todo->id) }}"
-                       class="pointer-event text-warning text-decoration-none">
+                       class="text-warning">
                         <span class="fas fa-edit fa-2x px-2"></span></a>
 
                     <span role="button" class="fas fa-trash text-danger fa-2x px-2"
@@ -43,7 +44,10 @@
                     </form>
                 </div>
             </li>
-        @endforeach
+        @empty
+            <p>No things needed, but you can make one.</p>
+        @endforelse
+
     </ul>
 @endsection
 

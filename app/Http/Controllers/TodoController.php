@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TodoCreateRequest;
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class TodoController extends Controller
@@ -15,14 +16,17 @@ class TodoController extends Controller
     }
 
     public function index(){
-
-        $todos = Todo::orderBy('completed')->get();
+        $todos = auth()->user()->todos->sortBy('completed');
         return view('todos.index', compact('todos'));
     }
 
     // Create
    public function create(){
         return view('todos.create');
+    }
+
+    public function show(Todo $todo){
+        return view('todos.show',compact('todo'));
     }
 
     // Edit
@@ -33,12 +37,8 @@ class TodoController extends Controller
     // Store
     public function store(TodoCreateRequest $request){
 
-
         auth()->user()->todos()->create($request->all());
-
-        //Todo::create($request->all());
-        // uploading
-        return redirect()->back()->with('message','Todo created successfully' );
+        return redirect(route('todo.index'))->with('message','Todo created successfully' );
     }
 
     // Update

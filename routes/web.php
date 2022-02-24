@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\TodoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +18,11 @@ use App\Http\Controllers\TodoController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 //Route::middleware('auth')->group(function(){
-    Route::resource('/todo', TodoController::class );
-    Route::put('/todos/{todo}/complete',[TodoController::class, 'complete'])->name('todo.complete');
-    Route::delete('/todos/{todo}/incomplete',[TodoController::class, 'incomplete'])->name('todo.incomplete');
+    Route::resource('/todo', App\Http\Controllers\TodoController::class);
+    Route::put('/todos/{todo}/complete',[App\Http\Controllers\TodoController::class, 'complete'])->name('todo.complete');
+    Route::delete('/todos/{todo}/incomplete',[App\Http\Controllers\TodoController::class, 'incomplete'])->name('todo.incomplete');
 //});
 /*Route::resource('/todo', TodoController::class );
 Route::get('/todos',[TodoController::class, 'index'])->name('todo.index');

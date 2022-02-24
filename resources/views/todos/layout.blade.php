@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
-
+    @livewireStyles
     <title>Todos</title>
 </head>
 <body>
@@ -18,6 +18,6 @@
     </div>
 
 </div>
-
+@livewireScripts
 </body>
 </html>

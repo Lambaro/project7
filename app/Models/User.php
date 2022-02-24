@@ -61,18 +61,4 @@ class User extends Authenticatable
         return $this->hasMany(Todo::class);
     }
 
-
-
-
-    /*// mutator chaning
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-
-    }
-    // accesor
-    public function getNameAttribute($name)
-    {
-        return 'My name is: ' . ucfirst($name);
-    }*/
 }
