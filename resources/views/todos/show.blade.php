@@ -9,8 +9,18 @@
     </div>
     <div>
         <div>
+            <h3>Description</h3>
             <p>{{ $todo->description }}</p>
         </div>
+
+        @if($todo->steps->count() > 0)
+        <div class="py-4">
+            <h3>Steps for this task</h3>
+            @foreach((array)$todo->step as $step)
+                <p>{{ $step}}</p>
+            @endforeach
+        </div>
+        @endif
     </div>
 
 @endsection

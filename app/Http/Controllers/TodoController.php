@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TodoCreateRequest;
 use App\Models\Todo;
+use App\Models\Step;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -37,7 +38,12 @@ class TodoController extends Controller
     // Store
     public function store(TodoCreateRequest $request){
 
-        auth()->user()->todos()->create($request->all());
+       $todo = auth()->user()->todos()->create($request->all());
+       if($request->step){
+           foreach( (array)$request->step as $step){
+               $todo->steps()->create(['name' => $step]);
+           }
+       }
         return redirect(route('todo.index'))->with('message','Todo created successfully' );
     }
 
@@ -46,6 +52,17 @@ class TodoController extends Controller
 
 
         $todo->update(['title' => $request->title]);
+        if($request->stepName){
+            foreach((array)$request->stepName as $key => $value){
+                $id = $request->stepId[$key];
+                if(!$id){
+                    $todo->steps()->create(['name' => $value]);
+                }else{
+                    $step = Step::find($id);
+                    $step->update(['name' => $value]);
+                }
+            }
+        }
         return redirect(route('todo.index'))->with('message', 'Updated!');
         // update todo
     }
@@ -59,8 +76,10 @@ class TodoController extends Controller
         $todo->update(['completed'=> false]);
         return redirect()->back()->with('message','Task Marked as incompleted!' );
     }
+
     public function destroy(Todo $todo){
 
+        $todo->steps->each->delete();
         $todo->delete();
         return redirect()->back()->with('message','Task deleted!' );
     }

@@ -22,6 +22,10 @@
             </textarea>
         </div>
         <div class="py-2">
+            @livewire('edit-step',['steps' => $todo->steps])
+        </div>
+
+        <div class="py-2">
         <input type="submit" value="update" class="p-2 border rounded bg-warning">
         </div>
     </form>

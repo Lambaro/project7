@@ -17,19 +17,16 @@
         </div>
 
         <div class="py-2">
-            <textarea name="description" class="p-2 rounded border"placeholder="Write your task here"></textarea>
+            <textarea name="description" class="p-2 rounded border" placeholder="Write your task here"></textarea>
         </div>
 
         <div class="py-2">
-            <div class="d-flex justify-content-between pb-2 px-4">
-                <h4 class="pb-2">Add steps for task</h4>
-                    <span role="button" class="fas fa-plus fa-2x text-primary"></span>
-            </div>
-
-            <input type="text" name="step" class="py-2 px-2 border" placeholder="Add step">
+            @livewire('step')
         </div>
 
-        <div class="py-2"><input type="submit" value="create" class="p-2 border rounded bg-warning"></div>
+        <div class="py-2">
+            <input type="submit" value="create" class="p-2 border rounded bg-warning">
+        </div>
     </form>
 @endsection
 
